@@ -5,51 +5,38 @@
  * Purpose:  Write a program that determines which part of a company has the highest sales.
  */
 #include <iostream>
-#include <string>   //allows for strings to be used 
-#include <stdlib.h>
-using namespace std; 
-float getSales(string division ){
-float sales;
-cout<<"Enter the quarterly sales for "<<division<<" : ";
-cin>>sales;
-if (sales < 0)
-		{
-			cout << "Error!\n"
-				 << "Quarterly sales must be more than 0.\n";
-		}
-return sales;
-}
+#include <string>       //allows for strings to be used
+using namespace std;
+int getNumAccidents(string);
+void findLowest(int[]);
+int main()
+{string region[]={"north","south","east","west","central"}; //the string of the five regions
+int i,accident[5];
+for(i=0;i<5;i++)
+   accident[i]=getNumAccidents(region[i]);
 
-void findHighest(float *max, string *division, float north, float south, float east, float west){       // makes for the functions to have no value in the sequence
-if(north > south && north > east && north > west){      //if statement that helps decide if North is the biggest
-*max = north;
-*division = "North";
-}else if(south > north && south > east && south > west){ //else if statement that decides if South is the biggest
-*max = south;
-*division = "South";
-}else if(east > south && east > north && east > west){  //else if statement that decides if East is the biggest
-*max = east;
-*division = "East";
-}else{                                                  //else if statement that decides if West is the biggest
-*max = west;
-*division = "West";
-}
-}
-
-void displayHighest(float max, string division){
-cout<<division<<" division has the maximum quarterly sales of "<<max<<endl;
-}
-int main(){                     //initializes variables in the program
-float north, south, east ,west, max;
-string highest;
-north = getSales("North");
-south = getSales("South");
-east = getSales("East");
-west = getSales("West");
-
-findHighest(&max, &highest, north, south, east, west);
-
-displayHighest(max, highest);  //displays the highest divisions sales
-
+findLowest(accident);       //allows program to find the region with the lowest amount of accidents
+system("pause");
 return 0;
+}
+int getNumAccidents(string r)       //compares the number of accidents 
+{int num=0;
+do{
+   cout<<"Enter number of accidents in the "<<r<<" region: ";
+   cin>>num;
+   if(num<0)
+      cout<<"Invalid entry-reenter\n";
+   }while(num<0);  
+return num;
+}
+void findLowest(int a[])
+{string region[]={"north","south","east","west","central"};
+int i,low,lowind=0;
+low=a[0];
+for(i=1;i<5;i++)        //compares the 5 regions to see which has the lowest amount of accidents in the given period
+   if(a[i]<low)
+      {low=a[i];
+      lowind=i;
+      }
+cout<<"\nThe region with the least accidents is the "<<region[lowind]<<" with "<<a[lowind]<<" accidents\n";    
 }

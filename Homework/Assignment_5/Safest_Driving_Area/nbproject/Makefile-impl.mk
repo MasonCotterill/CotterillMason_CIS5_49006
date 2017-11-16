@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Winning_Division
+PROJECTNAME=Safest_Driving_Area
 
 # Active Configuration
 DEFAULTCONF=Debug
